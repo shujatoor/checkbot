@@ -138,9 +138,10 @@ def main():
         for id in allowed_chat_ids:
             for symbol in crypto_lst:
             
+                print(tRSI)
                 price = crypto_price(symbol)
                 RSI = c_rsi(symbol, time_window)
-                dp.bot.send_message(id, "Hi, Good Morning!, it's " + datetime.datetime.now() + "The Price of " + symbol + " is " + price + " and it's RSI value is " + str(RSI))
+                dp.bot.send_message(id, "Hi, Good Morning! The current Price of " + symbol + " is " + price + " and it's RSI value is " + str(RSI))
     
     @sched.scheduled_job('cron', day_of_week='mon-sun', hour=1)
     def scheduled_job():
