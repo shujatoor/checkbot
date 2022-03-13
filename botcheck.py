@@ -111,6 +111,13 @@ def main():
     
     
     TOKEN = os.environ.get("TOKEN")
+    bot = telebot.TeleBot(TOKEN)
+    bot.config['api_key'] = TOKEN
+    
+    users = os.environ.get("Users") # allowed users.
+    allowed_chat_ids = users.split(",")
+    allowed_chat_ids = map(int, allowed_chat_ids)
+    
     updater = Updater(token = TOKEN)
     dp = updater.dispatcher
     dp.add_handler(CommandHandler("start", start))
@@ -123,9 +130,13 @@ def main():
     @sched.scheduled_job('interval', minutes=3)
     def timed_job():
         print('This job is run every three minutes.')
+        price = crypto_price(BTCUSDT)
+        RSI = c_rsi(BTCUSDT, 14)
+        context.bot.send_message(allowed_chat_ids[0], "The Price of BTCUSDT is " + price)
+        context.bot.send_message(allowed_chat_ids[0], "The RSI of BTCUSDT is " + str(RSI))
       
 
-    @sched.scheduled_job('cron', day_of_week='mon-fri', hour=17)
+    @sched.scheduled_job('cron', day_of_week='mon-sun', hour=1)
     def scheduled_job():
         print('This job is run every weekday at 5pm.')
 
