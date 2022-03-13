@@ -70,6 +70,7 @@ def crypto(update,context):
     symbol = r[0]
     tRSI = float(r[1])
     RSI = c_rsi(symbol, time_window)
+    print(type(RSI))
         
         
     if chat_id in allowed_chat_id:
