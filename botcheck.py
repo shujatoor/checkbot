@@ -23,7 +23,7 @@ def start(update, context):
     allowed_chat_ids = users.split(",")
     allowed_chat_ids = map(int, allowed_chat_ids)
     
-    if chat_id in allowed_chat_ids:
+    if chat_id in list(allowed_chat_ids):
         
         msg = "Hi " + name + " Welcome to crypto alerts. Please type cryptocurrency symbol and the target value of it's RSI e.g. for Bitcoin type as: BTCUSDT 50, where 50 is the target RSI value."
         context.bot.send_message(chat_id, msg)
