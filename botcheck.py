@@ -133,7 +133,7 @@ def main():
     @sched.scheduled_job('interval', minutes=2)
     def timed_job():
         
-        print(tRSI)
+        print(type(datetime.datetime.now()))
         
         for id in allowed_chat_ids:
             for symbol in crypto_lst:
