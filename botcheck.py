@@ -9,19 +9,21 @@ import pandas
 import numpy
 import urllib.request
 from ta.momentum import RSIIndicator
+from datetime import date, timedelta
 
 def start(update, context):
     
-    yourname = update.message.chat.first_name
+    name = update.message.chat.first_name
     chat_id = update.message.chat.id
     TOKEN = os.environ.get("TOKEN")
     bot = telebot.TeleBot(TOKEN)
     bot.config['api_key'] = TOKEN
-    allowed_chat_id = 5197954600 # This is my chat id.
+    users = os.environ.get("Users") # allowed users.
+    allowed_chat_ids = users.split(",")
     
-    if chat_id == allowed_chat_id:
+    if chat_id in allowed_chat_ids:
         
-        msg = "Hi " + yourname + " Welcome to crypto alerts, Please type crypto currency name to know its price"
+        msg = "Hi " + name + " Welcome to crypto alerts. Please type cryptocurrency symbol and the target value of it's RSI e.g. for Bitcoin type as: BTCUSDT 50, where 50 is the target RSI value"
         context.bot.send_message(chat_id, msg)
         
     else:
@@ -31,9 +33,12 @@ def start(update, context):
         
 def c_rsi(symbol, time_window):
     
-    y_symbol = symbol[:3] + '-' + 'USD'
+    l = len(symbol)
+    y_symbol = symbol[:l-4] + '-' + 'USD'
     window  = time_window
-    data = yf.download(y_symbol, start="2022-2-03", end="2022-3-10", interval = "1d")
+    today = date.today()
+    st = today - timedelta(days=30)
+    data = yf.download(y_symbol, start=st, end= today, interval = "1d")
     data = RSIIndicator(data["Close"], window)
     data = data.rsi()
     l = len(data)
@@ -56,7 +61,8 @@ def crypto(update,context):
     bot.config['api_key'] = TOKEN
     reply = update.message.text
     chat_id = update.message.chat.id
-    allowed_chat_id = [5197954600, 5276471645] #allowed users.
+    users = os.environ.get("Users") # allowed users.
+    allowed_chat_ids = users.split(",")
     time_window = 14
     
     RSI = c_rsi(reply, time_window)
