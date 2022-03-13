@@ -1,3 +1,4 @@
+from apscheduler.schedulers.blocking import BlockingScheduler
 from telegram.ext import Updater
 from telegram.ext import CommandHandler, MessageHandler, Filters
 import telebot
@@ -116,6 +117,20 @@ def main():
     dp.add_handler(MessageHandler(Filters.text, crypto))
     dp.add_handler(CommandHandler("details", details))
     dp.add_error_handler(error)
+
+    sched = BlockingScheduler()
+
+    @sched.scheduled_job('interval', minutes=3)
+    def timed_job():
+        print('This job is run every three minutes.')
+      
+
+    @sched.scheduled_job('cron', day_of_week='mon-fri', hour=17)
+    def scheduled_job():
+        print('This job is run every weekday at 5pm.')
+
+    sched.start()
+    
     
     updater.start_webhook(listen = "0.0.0.0", port = os.environ.get("PORT", 443),
                       url_path = TOKEN,
