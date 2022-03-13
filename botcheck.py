@@ -10,7 +10,8 @@ import pandas
 import numpy
 import urllib.request
 from ta.momentum import RSIIndicator
-from datetime import date, timedelta
+from datetime import date, timedelta, time
+import datetime
 
 def start(update, context):
     
@@ -132,12 +133,14 @@ def main():
     @sched.scheduled_job('interval', minutes=2)
     def timed_job():
         
+        print(tRSI)
+        
         for id in allowed_chat_ids:
             for symbol in crypto_lst:
             
                 price = crypto_price(symbol)
                 RSI = c_rsi(symbol, time_window)
-                dp.bot.send_message(id, "The Price of " + symbol + " is " + price + " and it's RSI value is " + str(RSI))
+                dp.bot.send_message(id, "Hi, Good Morning!, it's " + datetime.datetime.now() + "The Price of " + symbol + " is " + price + " and it's RSI value is " + str(RSI))
     
     @sched.scheduled_job('cron', day_of_week='mon-sun', hour=1)
     def scheduled_job():
