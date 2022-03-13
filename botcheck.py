@@ -68,7 +68,7 @@ def crypto(update,context):
     allowed_chat_ids = users.split(",")
     allowed_chat_ids = map(int, allowed_chat_ids)
     time_window = 14
-    r = reply.split(" ")
+    r = reply.split()
     symbol = r[0]
     print(r)
     tRSI = float(r[1])
