@@ -1,4 +1,4 @@
-from apscheduler.schedulers.blocking import BlockingScheduler
+from apscheduler.schedulers.blocking import BackgroundScheduler
 from telegram.ext import Updater
 from telegram.ext import CommandHandler, MessageHandler, Filters
 import telebot
@@ -118,7 +118,7 @@ def main():
     dp.add_handler(CommandHandler("details", details))
     dp.add_error_handler(error)
 
-    sched = BlockingScheduler()
+    sched = BackgroundScheduler()
 
     @sched.scheduled_job('interval', minutes=3)
     def timed_job():
