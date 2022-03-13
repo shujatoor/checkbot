@@ -63,18 +63,17 @@ def crypto(update,context):
     bot = telebot.TeleBot(TOKEN)
     bot.config['api_key'] = TOKEN
     reply = update.message.text
+    print(reply)
     chat_id = update.message.chat.id
     users = os.environ.get("Users") # allowed users.
     allowed_chat_ids = users.split(",")
     allowed_chat_ids = map(int, allowed_chat_ids)
     time_window = 14
     r = reply.split()
+    
     symbol = r[0]
-    print(r)
     tRSI = float(r[1])
-    print(tRSI)
     RSI = c_rsi(symbol, time_window)
-    print(RSI)
         
         
     if chat_id in allowed_chat_id:
