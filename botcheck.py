@@ -49,9 +49,7 @@ def c_rsi(symbol, time_window):
 def crypto_price(symbol):
     url = 'https://fapi.binance.com/fapi/v1/trades?symbol=' + symbol + '&limit=' + '1'
     data = requests.get(url).json()
-    price = data[-1]['price']
-    print(price)
-       
+    price = data[-1]['price']       
     return price
       
 def crypto(update,context):
