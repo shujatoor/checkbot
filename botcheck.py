@@ -21,9 +21,9 @@ def start(update, context):
     bot.config['api_key'] = TOKEN
     users = os.environ.get("Users") # allowed users.
     allowed_chat_ids = users.split(",")
-    allowed_chat_ids = map(int, allowed_chat_ids)
+    allowed_chat_ids = list(map(int, allowed_chat_ids))
     
-    if chat_id in list(allowed_chat_ids):
+    if chat_id in allowed_chat_ids:
         
         msg = "Hi " + name + " Welcome to crypto alerts. Please type cryptocurrency symbol and the target value of it's RSI e.g. for Bitcoin type as: BTCUSDT 50, where 50 is the target RSI value."
         context.bot.send_message(chat_id, msg)
@@ -64,7 +64,7 @@ def crypto(update,context):
     chat_id = update.message.chat.id
     users = os.environ.get("Users") # allowed users.
     allowed_chat_ids = users.split(",")
-    allowed_chat_ids = map(int, allowed_chat_ids)
+    allowed_chat_ids = list(map(int, allowed_chat_ids))
     time_window = 14
     r = reply.split()
     symbol = r[0]
@@ -116,7 +116,7 @@ def main():
     
     users = os.environ.get("Users") # allowed users.
     allowed_chat_ids = users.split(",")
-    allowed_chat_ids = map(int, allowed_chat_ids)
+    allowed_chat_ids = list(map(int, allowed_chat_ids))
     
     updater = Updater(token = TOKEN)
     dp = updater.dispatcher
@@ -133,7 +133,7 @@ def main():
         price = crypto_price('BTCUSDT')
         print(price)
         print(allowed_chat_ids)
-        #updater.bot.send_message(allowed_chat_ids[0] "The Price of BTCUSDT is " + price)
+        dp.bot.send_message(allowed_chat_ids[0] "The Price of BTCUSDT is " + price)
       
 
     @sched.scheduled_job('cron', day_of_week='mon-sun', hour=1)
