@@ -1,5 +1,12 @@
 from apscheduler.schedulers.blocking import BlockingScheduler
 
+TOKEN = os.environ.get("TOKEN")
+#bot = telebot.TeleBot(TOKEN)
+#bot.config['api_key'] = TOKEN
+users = os.environ.get("Users") # allowed users.
+allowed_chat_ids = users.split(",")
+allowed_chat_ids = map(int, allowed_chat_ids)
+
 sched = BlockingScheduler()
 
 @sched.scheduled_job('interval', minutes=3)
