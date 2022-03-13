@@ -138,7 +138,6 @@ def main():
         for id in allowed_chat_ids:
             for symbol in crypto_lst:
             
-                print(tRSI)
                 price = crypto_price(symbol)
                 RSI = c_rsi(symbol, time_window)
                 dp.bot.send_message(id, "Hi, Good Morning! The current Price of " + symbol + " is " + price + " and it's RSI value is " + str(RSI))
