@@ -117,6 +117,8 @@ def main():
     users = os.environ.get("Users") # allowed users.
     allowed_chat_ids = users.split(",")
     allowed_chat_ids = list(map(int, allowed_chat_ids))
+    crypto_lst = ['BTCUSDT', 'ETHUSDT', 'BNBUSDT', 'DOGEUSDT']
+    time_window = 14
     
     updater = Updater(token = TOKEN)
     dp = updater.dispatcher
@@ -129,16 +131,18 @@ def main():
 
     @sched.scheduled_job('interval', minutes=2)
     def timed_job():
-        print('This job is run every three minutes.')
-        price = crypto_price('BTCUSDT')
-        print(price)
-        print(allowed_chat_ids)
-        dp.bot.send_message(allowed_chat_ids[0], "The Price of BTCUSDT is " + price)
-      
-
+        
+        for id in allowed_chat_ids:
+            for symbol in crypto_lst:
+            
+                price = crypto_price(symbol)
+                RSI = c_rsi(symbol, time_window)
+                dp.bot.send_message(id, "The Price of " + symbol + " is " + price + " and it's RSI value is " + str(RSI))
+    
     @sched.scheduled_job('cron', day_of_week='mon-sun', hour=1)
     def scheduled_job():
-        print('This job is run every weekday at 5pm.')
+        
+       print("Hi")
 
     sched.start()
     
