@@ -132,7 +132,7 @@ def main():
         print('This job is run every three minutes.')
         price = crypto_price('BTCUSDT')
         print(price)
-        dp.bot.send_message(allowed_chat_ids[0], "The Price of BTCUSDT is " + price)
+        updater.bot.send_message(allowed_chat_ids[0], "The Price of BTCUSDT is " + price)
       
 
     @sched.scheduled_job('cron', day_of_week='mon-sun', hour=1)
