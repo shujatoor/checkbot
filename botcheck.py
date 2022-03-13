@@ -50,6 +50,7 @@ def crypto_price(symbol):
     url = 'https://fapi.binance.com/fapi/v1/trades?symbol=' + symbol + '&limit=' + '1'
     data = requests.get(url).json()
     price = data[-1]['price']
+    print(price)
        
     return price
       
@@ -68,7 +69,6 @@ def crypto(update,context):
     time_window = 14
     r = reply.split(" ")
     symbol = r[0]
-    print(type(symbol))
     tRSI = float(r[1])
     RSI = c_rsi(symbol, time_window)
         
@@ -76,7 +76,6 @@ def crypto(update,context):
     if chat_id in allowed_chat_id:
         if symbol in crypto_lst:
             price = crypto_price(symbol)
-            print(type(price))
             context.bot.send_message(chat_id, " The Price of " + symbol + " is " + price)
             
             if float(RSI) > tRSI:
