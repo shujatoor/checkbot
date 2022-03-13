@@ -69,13 +69,13 @@ def crypto(update,context):
     r = reply.split(" ")
     symbol = r[0]
     tRSI = float(r[1])
-    print(type(tRSI))
     RSI = c_rsi(symbol, time_window)
         
         
     if chat_id in allowed_chat_id:
         if symbol in crypto_lst:
             price = crypto_price(symbol)
+            print(type(price))
             context.bot.send_message(chat_id, " The Price of " + symbol + " is " + price)
             
             if float(RSI) > tRSI:
