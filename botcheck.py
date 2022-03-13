@@ -44,6 +44,7 @@ def c_rsi(symbol, time_window):
     data = data.rsi()
     l = len(data)
     RSI = data.iloc[l-1]
+    print(RSI)
     return RSI
 
 def crypto_price(symbol):
