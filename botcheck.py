@@ -24,12 +24,12 @@ def start(update, context):
     
     if chat_id in allowed_chat_ids:
         
-        msg = "Hi " + name + " Welcome to crypto alerts. Please type cryptocurrency symbol and the target value of it's RSI e.g. for Bitcoin type as: BTCUSDT 50, where 50 is the target RSI value"
+        msg = "Hi " + name + " Welcome to crypto alerts. Please type cryptocurrency symbol and the target value of it's RSI e.g. for Bitcoin type as: BTCUSDT 50, where 50 is the target RSI value."
         context.bot.send_message(chat_id, msg)
         
     else:
         
-        msg = "Hi " + yourname + " You are not registered..."
+        msg = "Hi " + name + " You are not registered..."
         context.bot.send_message(chat_id, msg)
         
 def c_rsi(symbol, time_window):
@@ -44,7 +44,6 @@ def c_rsi(symbol, time_window):
     data = data.rsi()
     l = len(data)
     RSI = data.iloc[l-1]
-    print(RSI)
     return RSI
 
 def crypto_price(symbol):
@@ -63,14 +62,12 @@ def crypto(update,context):
     bot = telebot.TeleBot(TOKEN)
     bot.config['api_key'] = TOKEN
     reply = update.message.text
-    print(reply)
     chat_id = update.message.chat.id
     users = os.environ.get("Users") # allowed users.
     allowed_chat_ids = users.split(",")
     allowed_chat_ids = map(int, allowed_chat_ids)
     time_window = 14
     r = reply.split()
-    
     symbol = r[0]
     tRSI = float(r[1])
     RSI = c_rsi(symbol, time_window)
