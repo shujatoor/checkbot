@@ -58,7 +58,7 @@ def crypto_price(symbol):
 def crypto(update,context):
     
     name = update.message.chat.first_name
-    crypto_lst = [BTCUSDT, ETHUSDT, USDTUSDT, BNBUSDT, DOGEUSDT]
+    crypto_lst = ['BTCUSDT', 'ETHUSDT', 'BNBUSDT', 'DOGEUSDT']
     TOKEN = os.environ.get("TOKEN")
     bot = telebot.TeleBot(TOKEN)
     bot.config['api_key'] = TOKEN
@@ -76,7 +76,7 @@ def crypto(update,context):
     RSI = c_rsi(symbol, time_window)
         
         
-    if chat_id in allowed_chat_id:
+    if chat_id in allowed_chat_ids:
         if symbol in crypto_lst:
             price = crypto_price(symbol)
             context.bot.send_message(chat_id, " The Price of " + symbol + " is " + price)
