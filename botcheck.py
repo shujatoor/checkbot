@@ -132,6 +132,8 @@ def main():
         print('This job is run every three minutes.')
         price = crypto_price(BTCUSDT)
         RSI = c_rsi(BTCUSDT, 14)
+        print(price)
+        print(RSI)
         context.bot.send_message(allowed_chat_ids[0], "The Price of BTCUSDT is " + price)
         context.bot.send_message(allowed_chat_ids[0], "The RSI of BTCUSDT is " + str(RSI))
       
