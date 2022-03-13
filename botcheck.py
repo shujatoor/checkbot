@@ -20,6 +20,7 @@ def start(update, context):
     bot.config['api_key'] = TOKEN
     users = os.environ.get("Users") # allowed users.
     allowed_chat_ids = users.split(",")
+    allowed_chat_ids = map(int, allowed_chat_ids)
     
     if chat_id in allowed_chat_ids:
         
@@ -63,6 +64,7 @@ def crypto(update,context):
     chat_id = update.message.chat.id
     users = os.environ.get("Users") # allowed users.
     allowed_chat_ids = users.split(",")
+    allowed_chat_ids = map(int, allowed_chat_ids)
     time_window = 14
     
     RSI = c_rsi(reply, time_window)
