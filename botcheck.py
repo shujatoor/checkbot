@@ -56,8 +56,8 @@ def crypto_price(symbol):
       
 def crypto(update,context):
     
-    yourname = update.message.chat.first_name
-    crypto_lst = ['BTCUSDT', 'ETHUSDT', 'USDTUSDT', 'BNBUSDT', 'DOGEUSDT']
+    name = update.message.chat.first_name
+    crypto_lst = [BTCUSDT, ETHUSDT, USDTUSDT, BNBUSDT, DOGEUSDT]
     TOKEN = os.environ.get("TOKEN")
     bot = telebot.TeleBot(TOKEN)
     bot.config['api_key'] = TOKEN
@@ -96,7 +96,7 @@ def crypto(update,context):
             
     else:
         
-        context.bot.send_message(chat_id, "Hi " + yourname + " You are not registered...")
+        context.bot.send_message(chat_id, "Hi " + name + " You are not registered...")
             
 def details(update,context):
     
