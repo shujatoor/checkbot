@@ -133,7 +133,7 @@ def main():
         price = crypto_price('BTCUSDT')
         print(price)
         print(allowed_chat_ids)
-        dp.bot.send_message(allowed_chat_ids[0] "The Price of BTCUSDT is " + price)
+        dp.bot.send_message(allowed_chat_ids[0], "The Price of BTCUSDT is " + price)
       
 
     @sched.scheduled_job('cron', day_of_week='mon-sun', hour=1)
