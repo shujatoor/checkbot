@@ -1,4 +1,4 @@
-from apscheduler.schedulers.blocking import BackgroundScheduler
+from apscheduler.schedulers.background import BackgroundScheduler
 from telegram.ext import Updater
 from telegram.ext import CommandHandler, MessageHandler, Filters
 import telebot
