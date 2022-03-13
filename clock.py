@@ -1,4 +1,4 @@
-Import os
+import os
 from apscheduler.schedulers.blocking import BlockingScheduler
 
 TOKEN = os.environ.get("TOKEN")
