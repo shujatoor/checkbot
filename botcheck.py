@@ -68,6 +68,7 @@ def crypto(update,context):
     time_window = 14
     r = reply.split("")
     symbol = r[0]
+    print(symbol)
     tRSI = float(r[1])
     RSI = c_rsi(symbol, time_window)
     print(type(RSI))
