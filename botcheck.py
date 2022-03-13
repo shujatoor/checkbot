@@ -66,25 +66,36 @@ def crypto(update,context):
     allowed_chat_ids = users.split(",")
     allowed_chat_ids = map(int, allowed_chat_ids)
     time_window = 14
-    
-    RSI = c_rsi(reply, time_window)
+    r = reply.split("")
+    symbol = r[0]
+    tRSI = float(r[1])
+    RSI = c_rsi(symbol, time_window)
         
-    #if RSI > 47:
-    
-        #print("BNB-USD ", f'RSI {RSI}', "OK")
-    #else:
-    
-        #print ("RSI did not reach the target value") 
         
     if chat_id in allowed_chat_id:
-        if reply in crypto_lst:
-            price = crypto_price(reply)
-            context.bot.send_message(chat_id, " The Price of " + reply + " is " + price + " and it's RSI Value is " + RSI)
+        if symbol in crypto_lst:
+            price = crypto_price(symbol)
+            context.bot.send_message(chat_id, " The Price of " + symbol + " is " + price)
+            
+            if RSI > tRSI:
+                
+                context.bot.send_message(chat_id, " The value of RSI for " + symbol + " is greater than the target value. The current value of RSI is " + str(RSI))
+                
+            elif RSI < tRSI:
+                
+                context.bot.send_message(chat_id, " The value of RSI for " + symbol + " is less than the target value. The current value of RSI is " + str(RSI))
+                
+            else:
+                
+                context.bot.send_message(chat_id, " The value of RSI for " + symbol + " is equal to the target value. The current value of RSI is " + str(RSI))
+                
         else:
+            
             context.bot.send_message(chat_id, " You have entered the wrong crypto_currency")
+            
     else:
-        msg = "Hi " + yourname + " You are not registered..."
-        context.bot.send_message(chat_id, msg)
+        
+        context.bot.send_message(chat_id, "Hi " + yourname + " You are not registered...")
             
 def details(update,context):
     
@@ -115,18 +126,3 @@ def main():
 if __name__ == '__main__':
     
     main()
-
-
-
-#def schedule_checker():
-    #while True:
-       #schedule.run_pending()
-       #sleep(1)
-
-#def function_to_run():
-    #message = btc_price()
-    #return bot.send_message(chat_id, message)
-
-#while True:  
-#schedule.every().day.at("11:46:00").do(function_to_run)
-#Thread(target=schedule_checker).start() 
