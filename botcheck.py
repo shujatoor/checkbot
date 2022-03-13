@@ -127,13 +127,13 @@ def main():
 
     sched = BackgroundScheduler()
 
-    @sched.scheduled_job('interval', minutes=3)
+    @sched.scheduled_job('interval', minutes=2)
     def timed_job():
         print('This job is run every three minutes.')
         price = crypto_price('BTCUSDT')
         print(price)
-        print(type(allowed_chat_ids[0]))
-        updater.bot.send_message(5197954600, "The Price of BTCUSDT is " + price)
+        print(allowed_chat_ids)
+        #updater.bot.send_message(allowed_chat_ids[0] "The Price of BTCUSDT is " + price)
       
 
     @sched.scheduled_job('cron', day_of_week='mon-sun', hour=1)
