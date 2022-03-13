@@ -11,9 +11,9 @@ allowed_chat_ids = map(int, allowed_chat_ids)
 sched = BlockingScheduler()
 
 @sched.scheduled_job('interval', minutes=3)
-def timed_job(update, context):
+def timed_job():
     print('This job is run every three minutes.')
-    context.bot.send_message(allowed_chat_ids[0], "Hi")
+    #context.bot.send_message(allowed_chat_ids[0], "Hi")
 
 @sched.scheduled_job('cron', day_of_week='mon-fri', hour=17)
 def scheduled_job():
