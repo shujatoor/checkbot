@@ -68,10 +68,9 @@ def crypto(update,context):
     time_window = 14
     r = reply.split(" ")
     symbol = r[0]
-    print(symbol)
     tRSI = float(r[1])
+    print(type(tRSI))
     RSI = c_rsi(symbol, time_window)
-    print(type(RSI))
         
         
     if chat_id in allowed_chat_id:
@@ -79,11 +78,11 @@ def crypto(update,context):
             price = crypto_price(symbol)
             context.bot.send_message(chat_id, " The Price of " + symbol + " is " + price)
             
-            if RSI > tRSI:
+            if float(RSI) > tRSI:
                 
                 context.bot.send_message(chat_id, " The value of RSI for " + symbol + " is greater than the target value. The current value of RSI is " + str(RSI))
                 
-            elif RSI < tRSI:
+            elif float(RSI) < tRSI:
                 
                 context.bot.send_message(chat_id, " The value of RSI for " + symbol + " is less than the target value. The current value of RSI is " + str(RSI))
                 
