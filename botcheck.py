@@ -148,7 +148,7 @@ def main():
                  dp.bot.send_message(id, "Hi, Good Morning! The current Price of " + symbol + " is " + price + " and it's RSI value is " + str(RSI))
                 
     trigger = CronTrigger(
-        year="*", month="*", day="*", hour="9", minute="56", second="0"
+        year="*", month="*", day="*", hour="10", minute="56", second="0"
     )
     sched.add_job(
         scheduled_job,
