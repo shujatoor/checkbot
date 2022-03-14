@@ -134,7 +134,7 @@ def main():
     #def timed_job():  
         #print("Hi")
     
-    @sched.scheduled_job('cron', day_of_week='mon-sun', hour=9, minute=30)
+    #@sched.scheduled_job('cron', day_of_week='mon-sun', hour=9, minute=30)
               
     def scheduled_job():
         
@@ -144,6 +144,16 @@ def main():
                  price = crypto_price(symbol)
                  RSI = c_rsi(symbol, time_window)
                  dp.bot.send_message(id, "Hi, Good Morning! The current Price of " + symbol + " is " + price + " and it's RSI value is " + str(RSI))
+                
+    trigger = CronTrigger(
+        year="*", month="*", day="*", hour="9", minute="45", second="0"
+    )
+    scheduler.add_job(
+        scheduled_job,
+        trigger=trigger,
+    )
+    while True:
+        sleep(5)
 
     sched.start()
     
