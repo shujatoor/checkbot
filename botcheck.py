@@ -133,7 +133,7 @@ def main():
     #@sched.scheduled_job('interval', minutes=2)
     #def timed_job():   
     
-    @sched.scheduled_job('cron', day_of_week='mon-sun', hour=4)
+    @sched.scheduled_job('cron', day_of_week='mon-sun', hour=8)
     def scheduled_job():
         
         for id in allowed_chat_ids:
