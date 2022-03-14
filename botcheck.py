@@ -132,9 +132,9 @@ def main():
 
     @sched.scheduled_job('interval', minutes=2)
     def timed_job():  
-        print("Hi"
+        print("Hi")
     
-    @sched.scheduled_job('cron', day_of_week='mon-sun', hour=9)
+    @sched.scheduled_job('cron', day_of_week='mon-sun', hour=9, minute=10)
               
     def scheduled_job():
         
