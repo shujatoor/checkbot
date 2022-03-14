@@ -134,7 +134,7 @@ def main():
     #def timed_job():  
         #print("Hi")
     
-    @sched.scheduled_job('cron', day_of_week='mon-sun', hour=9, minute=14)
+    @sched.scheduled_job('cron', day_of_week='mon-sun', hour=9, minute=25)
               
     def scheduled_job():
         
