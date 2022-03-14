@@ -12,6 +12,7 @@ import numpy
 import urllib.request
 from ta.momentum import RSIIndicator
 from datetime import date, timedelta, time
+import time
 import datetime
 
 def start(update, context):
