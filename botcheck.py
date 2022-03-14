@@ -131,14 +131,8 @@ def main():
     dp.add_error_handler(error)
 
     sched = BackgroundScheduler()
-
-    #@sched.scheduled_job('interval', minutes=2)
-    #def timed_job():  
-        #print("Hi")
-    
-    #@sched.scheduled_job('cron', day_of_week='mon-sun', hour=9, minute=30)
               
-    def scheduled_job():
+    def price_RSI():
         
         for id in allowed_chat_ids:
              for symbol in crypto_lst:
@@ -148,10 +142,12 @@ def main():
                  dp.bot.send_message(id, "Hi, Good Morning! The current Price of " + symbol + " is " + price + " and it's RSI value is " + str(RSI))
                 
     trigger = CronTrigger(
-        year="*", month="*", day="*", hour="12", minute="47", second="0"
+        year="*", month="*", 
+        day="*", hour="5", 
+        minute="15", second="0"
     )
     sched.add_job(
-        scheduled_job,
+        price_RSI,
         trigger=trigger,
     )
 
