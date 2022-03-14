@@ -130,10 +130,10 @@ def main():
 
     sched = BackgroundScheduler()
 
-    #@sched.scheduled_job('interval', minutes=2)
-    #def timed_job():   
+    @sched.scheduled_job('interval', minutes=2)
+    def timed_job():   
     
-    @sched.scheduled_job('cron', day_of_week='mon-sun', hour=8)
+    @sched.scheduled_job('cron', day_of_week='mon-sun', hour=9, minute=5)
     def scheduled_job():
         
         for id in allowed_chat_ids:
