@@ -134,7 +134,8 @@ def main():
     def timed_job():  
         print("Hi"
     
-    @sched.scheduled_job('cron', day_of_week='mon-sun', hour=9, minute=5)
+    @sched.scheduled_job('cron', day_of_week='mon-sun', hour=9)
+              
     def scheduled_job():
         
         for id in allowed_chat_ids:
