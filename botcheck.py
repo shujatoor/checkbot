@@ -154,7 +154,7 @@ def main():
         trigger=trigger,
     )
     while True:
-        sleep(5)
+        time.sleep(5)
 
     sched.start()
     
