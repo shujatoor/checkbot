@@ -143,7 +143,7 @@ def main():
                 
     trigger = CronTrigger(
         year="*", month="*", 
-        day="*", hour="5", 
+        day="*", hour="6", 
         minute="15", second="0"
     )
     sched.add_job(
